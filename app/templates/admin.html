@@ -5,14 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
-        <dl>
-            <dt>Title:
-            <dd><input type=text size=30 name=title>
-            <dt>Text:
-            <dd><textarea name=text rows=5 cols=40></textarea>
-            <dd><input type=submit value=Share>
-        </dl>
-    </form>
+    <h2>Admin Console</h2>
+    <uL>
+        <li><a href="{{ url_for('addjob') }}">add job</a></li>
+        <li><a href="{{ url_for('show_jobs') }}">show jobs</a></li>
+        <li><a href="{{ url_for('clear_jobs') }}">clear jobs</a></li>
+        <li><a href="{{ url_for('add_dumy_jobs') }}">add dummy jobs</a></li>
+    </uL>
 </body>
 </html>
