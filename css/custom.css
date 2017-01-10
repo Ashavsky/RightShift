@@ -1,0 +1,7 @@
+/* Add here all your css styles (customizations) */
+.backstretch {
+    background-image: url(../img/blur/img1.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
