@@ -1,0 +1,24 @@
+{% extends "search.html" %}
+
+{% block searchresults %}
+    <div id ="searchresults" style="display: none">
+        {% for job in jobs %}
+            <li><h2>{{ job.job_title}}</h2>
+                <ul>
+                    <li>Total Payment: {{ job.total_payment|safe }}</li>
+                    <li>Job Location: {{ job.location|safe }}</li>
+                    <li>Hospital Name: {{ job.hospital|safe }}</li>
+                </ul>
+        {% else %}
+            <li><em>Unbelievable. No jobs here so far</em>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block searchresults_scripts %}
+    $("#search_tip_boxes").slideUp();
+    $("#searchresults").delay(500).slideDown();
+{% endblock %}
+
+
+

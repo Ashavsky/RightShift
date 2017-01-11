@@ -17,8 +17,11 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 @app.route('/')
+def landing():
+    return render_template("landing.html")
+
+@app.route('/search')
 def search():
-    # return render_template("landing.html")
     return render_template("search.html")
 
 @app.route('/admin')
@@ -30,6 +33,17 @@ def admin():
 def addjob():
     return render_template("addjob.html")
 
+@app.route('/search_results')
+def search_results():
+    return render_template("search_results.html")
+
+@app.route('/search_results', methods=['POST'])
+def search_for_results():
+    cur = g.db.execute('select job_title, total_payment, location, hospital from jobs order by id desc')
+    jobs = [dict(job_title = row[0], total_payment=row[1], location=row[2], hospital = row[3]) for row in cur.fetchall()]
+    return render_template("search_results.html", jobs=jobs)
+
+
 @app.route('/add', methods=['POST'])
 def add_entry():
     payment = request.form['total_payment']
@@ -39,7 +53,6 @@ def add_entry():
     g.db.execute('insert into jobs (job_title, total_payment, location, hospital) values (?, ?, ?, ?)',
                  [job_title, payment, location, hospital])
     g.db.commit()
-    flash('New entry was successfully posted')
     return redirect(url_for('admin'))
 
 @app.route('/admin/showjobs')
